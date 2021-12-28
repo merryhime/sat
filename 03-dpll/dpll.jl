@@ -48,8 +48,8 @@ end
 freevar(e::Expr) =
     @match e begin
         Var(n)      => n
-        And(a, b)   => coalesce(freevar(a), freevar(b))
-        Or(a, b)    => coalesce(freevar(a), freevar(b))
+        And(a, b)   => @coalesce freevar(a) freevar(b)
+        Or(a, b)    => @coalesce freevar(a) freevar(b)
         Not(a)      => freevar(a)
         Const(_)    => missing
     end
